@@ -31,6 +31,10 @@ if !exists('g:jekyll_post_created')
   let g:jekyll_post_created = ""
 endif
 
+if !exists('g:jekyll_post_date')
+  let g:jekyll_post_date = ""
+endif
+
 if !exists('g:jekyll_title_pattern')
   let g:jekyll_title_pattern = "[ '\"]"
 endif
@@ -109,17 +113,22 @@ command! -nargs=0 JekyllList :call JekyllList()
 function JekyllPost(title)
   let published = g:jekyll_post_published
   let created = g:jekyll_post_created
+  let date = g:jekyll_post_date
   let tags = g:jekyll_prompt_tags
   let categories = g:jekyll_prompt_categories
 
   if created == "epoch"
     let created = localtime() 
-	elseif created == "custom"
-		let created = strftime("%Y-%m-%d %H:%M:%S")
-		let created .= " -5:00"
   elseif created != ""
     let created = strftime(created)
   endif
+	if date == "true"
+		let date = strftime("%Y-%m-%d %H:%M:%S")
+		let date .= " -5:00"
+	else
+		let date = ""
+	endif
+
   let title = a:title
   if title == ''
     let title = input("Post title: ")
@@ -140,6 +149,9 @@ function JekyllPost(title)
     if created != ""
       call add(template, "created:  "  . created)
     endif
+		if date != ""
+			call add(template, "date: " . date)
+		endif
     if tags != ""
       call add(template, "tags: [" . tags . "]")
     endif
