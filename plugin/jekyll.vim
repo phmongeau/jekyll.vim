@@ -114,6 +114,9 @@ function JekyllPost(title)
 
   if created == "epoch"
     let created = localtime() 
+	elseif created == "custom"
+		let created = strftime("%Y-%m-%d %H:%M:%S")
+		let created .= " -5:00"
   elseif created != ""
     let created = strftime(created)
   endif
@@ -130,7 +133,8 @@ function JekyllPost(title)
   if title != ''
     let file_name = strftime("%Y-%m-%d-") . s:esctitle(title) . "." . g:jekyll_post_suffix
     echo "Making that post " . file_name
-    exe "e " . g:jekyll_path . "/_posts/" . file_name
+    "exe "e " . g:jekyll_path . "/_posts/" . file_name
+    exe "e " . g:jekyll_path . "/draft/" . file_name
 
     let template = ["---", "layout: post", "title: \"" . title . "\"", "published: " . published]
     if created != ""
