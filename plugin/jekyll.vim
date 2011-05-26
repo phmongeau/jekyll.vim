@@ -35,6 +35,10 @@ if !exists('g:jekyll_post_date')
   let g:jekyll_post_date = ""
 endif
 
+if !exists('g:jekyll_post_timezone')
+  let g:jekyll_post_date = ""
+endif
+
 if !exists('g:jekyll_title_pattern')
   let g:jekyll_title_pattern = "[ '\"]"
 endif
@@ -114,6 +118,7 @@ function JekyllPost(title)
   let published = g:jekyll_post_published
   let created = g:jekyll_post_created
   let date = g:jekyll_post_date
+	let timezone = g:jekyll_post_timezone
   let tags = g:jekyll_prompt_tags
   let categories = g:jekyll_prompt_categories
 
@@ -122,11 +127,15 @@ function JekyllPost(title)
   elseif created != ""
     let created = strftime(created)
   endif
+
 	if date == "true"
 		let date = strftime("%Y-%m-%d %H:%M:%S")
-		let date .= " -5:00"
 	else
 		let date = ""
+	endif
+
+	if timezone != ""
+		let date .= " " . timezone
 	endif
 
   let title = a:title
