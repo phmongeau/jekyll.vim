@@ -25,6 +25,7 @@ Example:
     let g:jekyll_post_published = "false"
     let g:jekyll_post_created = "epoch"
     let g:jekyll_post_created = "%D %T"
+    let g:jekyll_post_date = "true"
     let g:jekyll_prompt_tags = "true"
     let g:jekyll_prompt_categories = "true"
 
