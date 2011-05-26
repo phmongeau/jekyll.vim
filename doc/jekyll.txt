@@ -26,6 +26,7 @@ Example:
     let g:jekyll_post_created = "epoch"
     let g:jekyll_post_created = "%D %T"
     let g:jekyll_post_date = "true"
+    let g:jekyll_post_timezone = "-5:00"
     let g:jekyll_prompt_tags = "true"
     let g:jekyll_prompt_categories = "true"
 
